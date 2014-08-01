@@ -57,9 +57,14 @@ class wechatCallbackapiTest
 
     public function responseMsg()
     {
+    	require 'plog/classes/plog.php';
+		Plog::set_config(include 'plog/config.php');
+		$log = Plog::factory(__FILE__);
+		
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-            $this->logger("R",$postStr);
+            //$this->logger("R",$postStr);
+            $log->R($postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
 
@@ -72,7 +77,8 @@ class wechatCallbackapiTest
                     $result = $this->receiveText($postObj);
                     break;
             }
-            $this->logger("T",$result);
+            //$this->logger("T",$result);
+            $log->T($result);
             echo $result;
         }else {
             echo "";
