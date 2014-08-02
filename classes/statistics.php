@@ -2,11 +2,8 @@
 
 class STATISTICS 
 {
-	
 	public static function statisticssend($sender)  //统计发送信息次数
 	{
-		
-
 		$sql = "SELECT id,sendtimes FROM user WHERE userid='$sender'";
 		$data = mysql_query($sql);
 		$row = mysql_fetch_array($data);
@@ -15,21 +12,14 @@ class STATISTICS
 			$newid=self::getmaxid("user")+1;
 			$sql = "INSERT INTO user(id,userid,sendtimes) value ('$newid','$sender','1')";
 			mysql_query($sql);
-			
 		}
 		else 
 		{
 			$newid = $row[0];
-
-			
 			$st = $row[1] + 1;
 			$sql = "UPDATE user SET sendtimes = '$st' WHERE id='$newid'"; 
 			mysql_query($sql);
-			
 		}
-		
-
-	
 	}
 	
 	public static function getmaxid($tablename)
@@ -42,7 +32,6 @@ class STATISTICS
 		return $row[0];
 	}	
 
-	
-	
-	
 }
+
+?>
